@@ -3,7 +3,6 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.swing.JButton;
@@ -41,7 +40,6 @@ public class ChatController {
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection con=(Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/ChatDB","root","root");
 			PreparedStatement statement=(PreparedStatement) con.prepareStatement(" insert into users values('"+name+"','"+upass+"','"+123+"')");
-			//"INSERT INTO `time_entry`(pid,tid,rid,tspend,description) VALUE ('"+pid+"','"+tid+"','"+rid+"',"+tspent+",'"+des+"')"
 			statement.execute();
 			
 		}
@@ -61,7 +59,6 @@ public class ChatController {
 				public void actionPerformed(ActionEvent e)
 			      {
 					frame.getContentPane().removeAll();
-					
 					JPanel panel=new JPanel();
 					panel.setBorder(new EmptyBorder(200,200,200,200));
 					frame.setContentPane(panel);
@@ -85,6 +82,7 @@ public class ChatController {
 							}
 						});
 					frame.setVisible(true);
+					frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			      }
 			});
 			existingUser.setPreferredSize(new Dimension(200,40));
