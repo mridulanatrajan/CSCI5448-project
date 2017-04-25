@@ -5,27 +5,12 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class homeView {
 
 	private JFrame frmLetschat;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					homeView window = new homeView();
-					window.frmLetschat.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
 	/**
 	 * Create the application.
 	 */
@@ -49,6 +34,12 @@ public class homeView {
 		frmLetschat.getContentPane().add(lblMyDasboard);
 		
 		JButton btnManageContacts = new JButton("Manage Contacts");
+		btnManageContacts.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frmLetschat.dispose();
+				manageContactView mc=new manageContactView();
+			}
+		});
 		btnManageContacts.setBounds(129, 39, 190, 37);
 		frmLetschat.getContentPane().add(btnManageContacts);
 		

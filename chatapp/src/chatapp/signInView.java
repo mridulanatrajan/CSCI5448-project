@@ -70,7 +70,7 @@ public class signInView {
 		btnSignIn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					userValidateController uvc=new userValidateController(textField.getText(),textField_1.getText());
+					signinValidate uvc=new signinValidate(textField.getText(),textField_1.getText());
 					if(!uvc.valid){
 						frame.dispose();
 						errorViewSI ev=new errorViewSI();
