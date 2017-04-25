@@ -51,7 +51,7 @@ public class registerView {
 		btnSignIn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frmLetschat.setVisible(false);
-				homeView hv=new homeView();
+				signInView si=new signInView();
 			}
 		});
 		btnSignIn.setBounds(152, 83, 117, 25);
