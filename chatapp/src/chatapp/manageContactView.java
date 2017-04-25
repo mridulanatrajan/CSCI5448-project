@@ -59,5 +59,6 @@ public class manageContactView {
 		JButton btnStartChat = new JButton("start chat");
 		btnStartChat.setBounds(230, 130, 117, 25);
 		frame.getContentPane().add(btnStartChat);
+		frame.setVisible(true);
 	}
 }

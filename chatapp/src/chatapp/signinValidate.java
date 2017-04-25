@@ -18,6 +18,10 @@ public class signinValidate extends userValidateController {
 		{
 			if(uname.equals(r.getString("username"))&& upass.equals(r.getString("pass")))
 			{
+				User u=new User();
+				u.setPassword(upass);
+				u.setUsername(uname);
+				u.setUserID(r.getInt("userid"));
 				return true;
 			}
 		}

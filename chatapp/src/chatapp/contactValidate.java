@@ -1,7 +1,11 @@
 package chatapp;
 
+import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import com.mysql.jdbc.Connection;
+import com.mysql.jdbc.PreparedStatement;
 
 public class contactValidate extends userValidateController{
 
@@ -22,6 +26,5 @@ public class contactValidate extends userValidateController{
 		return false;
 		
 	}
-	
 
 }
