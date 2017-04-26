@@ -12,16 +12,19 @@ public abstract class userValidateController {
 	boolean valid;
 	String uname;
 	String upass;
+	User per;
 	
-	public userValidateController(String u) throws ClassNotFoundException, SQLException
+	public userValidateController(String u,User uu) throws ClassNotFoundException, SQLException
 	{
 	 uname=u;
+	 per=uu;
 	 valid=connecttoDB();	
 	}
-	public userValidateController(String u, String p) throws ClassNotFoundException, SQLException
+	public userValidateController(String u, String p,User uu) throws ClassNotFoundException, SQLException
 	{
 	 uname=u;
 	 upass=p;
+	 per=uu;
 	 valid=connecttoDB();	
 	}
 	
@@ -36,6 +39,6 @@ public abstract class userValidateController {
 		
 	}
 	
-	abstract boolean validate(ResultSet r)throws SQLException;
+	abstract boolean validate(ResultSet r)throws SQLException,ClassNotFoundException;
 
 }

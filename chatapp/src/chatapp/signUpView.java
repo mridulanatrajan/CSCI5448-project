@@ -15,6 +15,7 @@ public class signUpView {
 	private JFrame frame;
 	private JTextField textField;
 	private JTextField textField_1;
+	User u=new User();
 
 	/**
 	 * Launch the application.
@@ -76,7 +77,7 @@ public class signUpView {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				homeView hv=new homeView();
+				homeView hv=new homeView(u);
 			}
 		});
 		btnRegisterMe.setBounds(151, 157, 153, 25);

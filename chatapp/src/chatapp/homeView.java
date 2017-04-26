@@ -11,10 +11,12 @@ import java.awt.event.ActionEvent;
 public class homeView {
 
 	private JFrame frmLetschat;
+	User per;
 	/**
 	 * Create the application.
 	 */
-	public homeView() {
+	public homeView(User u) {
+		per=u;
 		initialize();
 	}
 
@@ -37,7 +39,7 @@ public class homeView {
 		btnManageContacts.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frmLetschat.dispose();
-				manageContactView mc=new manageContactView();
+				manageContactView mc=new manageContactView(per);
 			}
 		});
 		btnManageContacts.setBounds(129, 39, 190, 37);

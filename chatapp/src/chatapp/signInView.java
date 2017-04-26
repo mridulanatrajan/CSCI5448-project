@@ -15,6 +15,7 @@ public class signInView {
 	private JFrame frame;
 	private JTextField textField;
 	private JTextField textField_1;
+	User u=new User();
 
 	/**
 	 * Launch the application.
@@ -70,7 +71,7 @@ public class signInView {
 		btnSignIn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					signinValidate uvc=new signinValidate(textField.getText(),textField_1.getText());
+					signinValidate uvc=new signinValidate(textField.getText(),textField_1.getText(),u);
 					if(!uvc.valid){
 						frame.dispose();
 						errorViewSI ev=new errorViewSI();
@@ -78,7 +79,7 @@ public class signInView {
 					else
 					{
 						frame.dispose();
-						homeView hv=new homeView();
+						homeView hv=new homeView(u);
 					}
 				} catch (ClassNotFoundException | SQLException e) {
 					e.printStackTrace();

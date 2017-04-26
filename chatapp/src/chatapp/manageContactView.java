@@ -5,20 +5,24 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JList;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 
 public class manageContactView {
 
 	private JFrame frame;
 	private JTextField textField;
+	User per;
 
 	/**
 	 * Create the application.
 	 */
-	public manageContactView() {
+	public manageContactView(User u) {
+		per=u;
 		initialize();
 	}
 
@@ -39,16 +43,26 @@ public class manageContactView {
 		textField.setBounds(22, 39, 172, 39);
 		frame.getContentPane().add(textField);
 		textField.setColumns(10);
-		
+		DefaultListModel<String> listModel = new DefaultListModel<>();
+		JList list = new JList(listModel);
+		list.setBounds(32, 134, 138, 75);
 		JButton btnAdd = new JButton("Add");
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				try {
+					contactValidate cv=new contactValidate(textField.getText(),per);
+					if(cv.valid)
+					{
+						
+						listModel.addElement(textField.getText());
+					}
+				} catch (ClassNotFoundException | SQLException e1) {
+					e1.printStackTrace();
+				}
 			}
 		});
 		btnAdd.setBounds(230, 46, 117, 25);
 		frame.getContentPane().add(btnAdd);
-		
-		JList list = new JList();
 		list.setBounds(32, 134, 138, 75);
 		frame.getContentPane().add(list);
 		
