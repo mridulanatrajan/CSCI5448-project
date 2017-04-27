@@ -27,8 +27,6 @@ public class Server {
             listener.close();
         }
     }
-
-   
     private static class Handler extends Thread {
         private String name;
         private Socket socket;
@@ -39,8 +37,6 @@ public class Server {
         public Handler(Socket socket) {
             this.socket = socket;
         }
-
-        
         public void run() {
             try {
 
@@ -62,12 +58,7 @@ public class Server {
                         }
                     }
                 }
-
-               
-                out.println("NAMEACCEPTED");
                 writers.add(out);
-
-                
                 while (true) {
                     String input = in.readLine();
                     if (input == null) {

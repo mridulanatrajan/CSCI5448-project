@@ -5,10 +5,13 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.SwingWorker;
+
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JList;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 
@@ -71,6 +74,36 @@ public class manageContactView {
 		frame.getContentPane().add(lblSelectAContact);
 		
 		JButton btnStartChat = new JButton("start chat");
+		btnStartChat.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				frame.dispose();
+				String friend=(String) list.getSelectedValue();
+				
+				//Client c=new Client();
+
+				Client client = new Client(per,friend);
+    	        client.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    	        client.frame.setVisible(true);
+    	        
+    	        SwingWorker<String, Object> worker = new SwingWorker<String, Object>() {
+    	            @Override
+    	            protected String doInBackground() throws Exception {                
+    	            	try {
+    						client.run();
+    					} catch (IOException e1) {
+    						// TODO Auto-generated catch block
+    						e1.printStackTrace();
+    					} 
+    	            	return "hi";
+    	            }
+    	            @Override
+    	            protected void done() {
+    	               
+    	            }
+    	        };      
+    	        worker.execute();
+			}
+		});
 		btnStartChat.setBounds(230, 130, 117, 25);
 		frame.getContentPane().add(btnStartChat);
 		frame.setVisible(true);
