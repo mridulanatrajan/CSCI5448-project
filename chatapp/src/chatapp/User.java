@@ -3,9 +3,9 @@ package chatapp;
 public class User {
 	
 	
-	String username;
-	String password;
-	int userID;
+	public static String username;
+	public static String password;
+	public static int userID;
 	
 	
 	public String getUsername() {

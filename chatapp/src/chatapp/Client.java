@@ -56,17 +56,26 @@ public class Client {
 
     public void run() throws IOException {
 
-        Socket socket = new Socket("127.0.0.1", 9001);
+        Socket socket = new Socket("127.0.0.1", 1991);
         in = new BufferedReader(new InputStreamReader(
             socket.getInputStream()));
         out = new PrintWriter(socket.getOutputStream(), true);
 
         while (true) {
             String line = in.readLine();
-            if (line.startsWith("SUBMITNAME")) {
+            if(line.startsWith("mode"))
+            {
+            	out.println("p2p");
+            }
+            else if (line.startsWith("name")) {
                 out.println(per.getUsername());
-            } else if (line.startsWith("MESSAGE")) {
-                messageArea.append(line.substring(8) + "\n");
+            }
+            else if(line.startsWith("friend"))
+            {
+            	out.println(fr);
+            }
+            else if (line.startsWith("msg ")) {
+                messageArea.append(line.substring(4) + "\n");
             }
         }
 
