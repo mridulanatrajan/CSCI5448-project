@@ -9,16 +9,18 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-public class Server extends Thread{
+public class Server extends Thread implements ChatSubject{
 
     private String name;
 	private Socket sock;
 	private BufferedReader in;
     private PrintWriter out;
     private static String mode;
+    private String gname;
     private String frnd;
+    private static String fingrp="";
     private static String finfrnd="";
-    private static HashSet<String>friends=new HashSet<String>();
+    private static HashSet<String> groupmemebers;
     private static HashSet<String>names = new HashSet<String>();
     private static HashSet<PrintWriter> writers = new HashSet<PrintWriter>();
     
@@ -27,6 +29,65 @@ public class Server extends Thread{
     {
     	this.sock=sock;
     }
+    
+    public void registerObserver(BufferedReader inp, PrintWriter outp)
+    {
+    	while(true)
+    	{
+    		outp.println("name");
+    		try {
+				name=inp.readLine();
+				outp.println("group");
+	    		gname=inp.readLine();
+	    		synchronized(names){
+	    			if(!names.contains(name))
+	    			{
+	    				if(fingrp.equals(""))
+	    				{
+	    					names.add(name);
+	    					fingrp=gname;
+	    					writers.add(outp);
+	    				}
+	    				else if(fingrp.equals(gname))
+	    				{
+	    					names.add(name);
+	    					writers.add(outp);
+	    					
+	    				}
+	    				break;
+	    			}
+	    		}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    		
+    		
+    	}
+    	while(true)
+    	{
+    		notifyObserver(inp,writers,name);
+    	}
+    }
+    
+    public void notifyObserver(BufferedReader inp,HashSet<PrintWriter> pw,String name)
+    {
+    		 String input;
+			try {
+				input = inp.readLine();
+				if(names.contains(name))
+	              {
+		            for (PrintWriter p : pw) {
+		                p.println("msg " + name + ": " + input);
+		            }
+	           }		
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+              
+    		
+    }
+    
     
     public void peertopeer(BufferedReader inp, PrintWriter outp) throws IOException
     {
@@ -77,7 +138,11 @@ public class Server extends Thread{
 				if(mode.equals("p2p"))
 				{
 					peertopeer(in,out);
-				}	
+				}
+				else if(mode.equals("group"))
+				{
+					registerObserver(in,out);
+				}
 			}
     	} catch (IOException e) {
 			e.printStackTrace();
