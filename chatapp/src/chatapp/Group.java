@@ -1,18 +1,19 @@
 package chatapp;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class Group {
 	
-	public static String groupid;
+	public static int groupid;
 	public static String groupname;
-	public static ArrayList<String> groupmembers;
+	public static HashSet<String> groupmembers;
 	
-	public static String getGroupid() {
+	public static int getGroupid() {
 		return groupid;
 	}
 	
-	public static void setGroupid(String groupid) {
+	public static void setGroupid(int groupid) {
 		Group.groupid = groupid;
 	}
 	
@@ -24,12 +25,13 @@ public class Group {
 		Group.groupname = groupname;
 	}
 
-	public static ArrayList<String> getGroupmembers() {
+	public static HashSet<String> getGroupmembers() {
 		return groupmembers;
 	}
 
-	public static void setGroupmembers(ArrayList<String> groupmembers) {
+	public static void setGroupmembers(HashSet<String> groupmembers) {
 		Group.groupmembers = groupmembers;
 	}
+
 
 }
