@@ -13,6 +13,7 @@ public class GroupMgmtController {
 	Connection con;
 	PreparedStatement st;
 	ResultSet rs;
+	boolean candelete;
 	
 	GroupMgmtController() throws ClassNotFoundException, SQLException
 	{
@@ -57,6 +58,26 @@ public class GroupMgmtController {
 		st=(PreparedStatement) con.prepareStatement("select * from groupmembers where groupname='"+Group.getGroupname()+"'");
 		rs=st.executeQuery();
 		return rs;
+		
+	}
+	
+	public boolean deleteGroup(String grp) throws SQLException
+	{
+		st=(PreparedStatement) con.prepareStatement("select * from groupmembers where groupname='"+grp+"'");
+		rs=st.executeQuery();
+		while(rs.next())
+		{
+			if(rs.getString("username").equals(User.getUsername()) && "Admin".equals(rs.getString("role")))
+			{
+			  st=(PreparedStatement) con.prepareStatement("delete from groupmembers where groupname='"+grp+"'");
+			  st.executeUpdate();
+			  st=(PreparedStatement) con.prepareStatement("delete from groups where groupname='"+grp+"'");
+			  st.executeUpdate();
+			  return true;
+			}
+		}
+		return false;
+	
 		
 	}
 
