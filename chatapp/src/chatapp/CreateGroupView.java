@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -13,7 +14,7 @@ import java.awt.event.ActionEvent;
 
 public class CreateGroupView {
 
-	private JFrame frame;
+	private JFrame frmLetschat;
 	private JTextField textField;
 	private JLabel lblChooseMembers;
 	private JTextField textField_1;
@@ -21,6 +22,7 @@ public class CreateGroupView {
 	Random rand = new Random();
 	GroupMgmtController gm;
 	String gname;
+	private JButton btnBack;
 
 	public CreateGroupView() throws ClassNotFoundException, SQLException {
 		initialize();
@@ -33,27 +35,30 @@ public class CreateGroupView {
 	 */
 	private void initialize() throws ClassNotFoundException, SQLException {
 		gm=new GroupMgmtController();
-		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		frmLetschat = new JFrame();
+		frmLetschat.setTitle("LetsChat");
+		frmLetschat.getContentPane().setBackground(UIManager.getColor("OptionPane.questionDialog.titlePane.background"));
+		frmLetschat.setBackground(UIManager.getColor("Button.background"));
+		frmLetschat.setBounds(100, 100, 483, 415);
+		frmLetschat.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmLetschat.getContentPane().setLayout(null);
 		
 		JLabel lblEnterNameOf = new JLabel("Enter Name of Group:");
 		lblEnterNameOf.setBounds(12, 34, 154, 16);
-		frame.getContentPane().add(lblEnterNameOf);
+		frmLetschat.getContentPane().add(lblEnterNameOf);
 		
 		textField = new JTextField();
-		textField.setBounds(178, 34, 214, 22);
-		frame.getContentPane().add(textField);
+		textField.setBounds(178, 24, 214, 44);
+		frmLetschat.getContentPane().add(textField);
 		textField.setColumns(10);
 		
 		lblChooseMembers = new JLabel("Choose Members:");
-		lblChooseMembers.setBounds(44, 128, 157, 16);
-		frame.getContentPane().add(lblChooseMembers);
+		lblChooseMembers.setBounds(53, 161, 157, 16);
+		frmLetschat.getContentPane().add(lblChooseMembers);
 		
 		textField_1 = new JTextField();
-		textField_1.setBounds(36, 168, 216, 22);
-		frame.getContentPane().add(textField_1);
+		textField_1.setBounds(44, 203, 216, 49);
+		frmLetschat.getContentPane().add(textField_1);
 		textField_1.setColumns(10);
 		
 		btnAdd = new JButton("Add");
@@ -69,8 +74,8 @@ public class CreateGroupView {
 				
 			}
 		});
-		btnAdd.setBounds(295, 166, 97, 25);
-		frame.getContentPane().add(btnAdd);
+		btnAdd.setBounds(295, 201, 97, 25);
+		frmLetschat.getContentPane().add(btnAdd);
 		
 		JButton btnSubmit = new JButton("Submit");
 		btnSubmit.addActionListener(new ActionListener() {
@@ -85,8 +90,18 @@ public class CreateGroupView {
 			}
 			}
 		});
-		btnSubmit.setBounds(158, 65, 117, 25);
-		frame.getContentPane().add(btnSubmit);
-		frame.setVisible(true);
+		btnSubmit.setBounds(155, 80, 131, 38);
+		frmLetschat.getContentPane().add(btnSubmit);
+		
+		btnBack = new JButton("Back");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frmLetschat.dispose();
+				GrpMgmtView gv=new GrpMgmtView();
+			}
+		});
+		btnBack.setBounds(169, 303, 117, 38);
+		frmLetschat.getContentPane().add(btnBack);
+		frmLetschat.setVisible(true);
 	}
 }

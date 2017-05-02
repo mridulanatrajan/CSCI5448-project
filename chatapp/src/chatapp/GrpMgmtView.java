@@ -62,11 +62,8 @@ public class GrpMgmtView {
 		JButton btnNewButton_2 = new JButton("Back");
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try {
-					ProfileManagagementView pmv=new ProfileManagagementView();
-				} catch (ClassNotFoundException | SQLException e1) {
-					e1.printStackTrace();
-				}
+				frmLetschat.dispose();
+				HomeView pmv=new HomeView();
 			}
 		});
 		btnNewButton_2.setBounds(177, 250, 117, 53);

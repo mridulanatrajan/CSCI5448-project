@@ -90,3 +90,15 @@ public class Client {
 		
 	}
 }
+
+
+/*
+*This code was referenced from http://cs.lmu.edu/~ray/notes/javanetexamples/
+*
+*Methods incorporated and modified:
+*1) run
+*
+*Methods added:
+*1) update
+*
+*/

@@ -7,20 +7,20 @@ import java.sql.SQLException;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 
-public abstract class userValidateController {
+public abstract class UserValidateController {
 	
 	boolean valid;
 	String uname;
 	String upass;
 	User per;
 	
-	public userValidateController(String u,User uu) throws ClassNotFoundException, SQLException
+	public UserValidateController(String u,User uu) throws ClassNotFoundException, SQLException
 	{
 	 uname=u;
 	 per=uu;
 	 valid=connecttoDB();	
 	}
-	public userValidateController(String u, String p,User uu) throws ClassNotFoundException, SQLException
+	public UserValidateController(String u, String p,User uu) throws ClassNotFoundException, SQLException
 	{
 	 uname=u;
 	 upass=p;

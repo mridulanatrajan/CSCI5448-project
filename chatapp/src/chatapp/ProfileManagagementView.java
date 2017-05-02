@@ -107,6 +107,7 @@ public class ProfileManagagementView {
 		JButton btnBack = new JButton("Back");
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				frmLetschat.dispose();
 				HomeView hv=new HomeView();
 				
 			}

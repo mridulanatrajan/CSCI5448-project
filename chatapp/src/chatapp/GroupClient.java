@@ -44,6 +44,12 @@ public class GroupClient implements ChatObserver{
         frmLetschat.getContentPane().add(textField);
         frmLetschat.getContentPane().add(messageArea);
         frmLetschat.getContentPane().add(btnNewButton);
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frmLetschat.dispose();
+				GrpMgmtView gv=new GrpMgmtView();
+			}
+		});
 		frmLetschat.getContentPane().add(btnBack);
         textField.addActionListener(new ActionListener() {
           

@@ -58,7 +58,6 @@ public class Server extends Thread implements ChatSubject{
 	    			}
 	    		}
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
     		
@@ -162,3 +161,22 @@ public class Server extends Thread implements ChatSubject{
     }
     
 }
+
+
+
+
+/*
+*This code was referenced from http://cs.lmu.edu/~ray/notes/javanetexamples/
+*
+*Methods incorporated
+*1)main
+*
+*Methods incorporated and modified:
+*1) run
+*
+*Methods added:
+*1) notifiObserver
+*2) peertopeer
+*3) registerObserver
+*
+*/

@@ -32,6 +32,8 @@ public class ManageContactView {
 	PreparedStatement stmt;
 	ResultSet st;
 	ChatappModel c=new ChatappModel();
+	int index;
+	String contact;
 
 	/**
 	 * Create the application.
@@ -79,7 +81,7 @@ public class ManageContactView {
 			listModel.addElement(st.getString("contact"));
 		}
 		
-		list.setBounds(32, 134, 184, 75);
+		list.setBounds(32, 134, 138, 141);
 		JButton btnAdd = new JButton("Add");
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -135,12 +137,41 @@ public class ManageContactView {
 		frmLetschat.getContentPane().add(btnStartChat);
 		
 		JButton btnBack = new JButton("Back");
-		btnBack.setBounds(167, 270, 117, 51);
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					frmLetschat.dispose();
+					ProfileManagagementView pmv=new ProfileManagagementView();
+				} catch (ClassNotFoundException | SQLException e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+		btnBack.setBounds(183, 270, 117, 51);
 		frmLetschat.getContentPane().add(btnBack);
 		
 		JScrollBar scrollBar = new JScrollBar();
 		scrollBar.setBounds(153, 148, 17, 61);
 		frmLetschat.getContentPane().add(scrollBar);
+		
+		JButton btnDeleteContact = new JButton("Delete Contact");
+		btnDeleteContact.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				index = list.getSelectedIndex();
+				contact=(String) list.getSelectedValue();
+				listModel.removeElementAt(index);
+				try {
+					stmt=(PreparedStatement) con.prepareStatement("delete from contacts where contact='"+contact+"'");
+					stmt.executeUpdate();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			}
+			
+			
+		});
+		btnDeleteContact.setBounds(265, 195, 147, 39);
+		frmLetschat.getContentPane().add(btnDeleteContact);
 		frmLetschat.setVisible(true);
 	}
 }
