@@ -1,0 +1,7 @@
+This file includes the link for Project Part - 4 Presentation Demo, which is a MP4 (extesnsion) video that needs to be downloaded (from
+the Google Drive link) to be played.
+
+A brief demo walk-through demo of the system (ChatApp) showing 2-3 use-cases. Then we focus on a particular design pattern or two. 
+We describe what we applied (Observer Design Pattern) and why, and what you could apply (Memento Design Pattern) and how.
+
+Link: https://drive.google.com/drive/u/0/folders/0B_4GD1L4x4KraFRiZXFxYU5fODg
