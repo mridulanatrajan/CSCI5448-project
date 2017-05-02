@@ -15,7 +15,7 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.awt.event.ActionEvent;
 
-public class Client {
+public class GroupClient implements ChatObserver{
 
 	 BufferedReader in;
 	    PrintWriter out;
@@ -23,14 +23,10 @@ public class Client {
 	    JTextField textField = new JTextField();
 	    JTextArea messageArea = new JTextArea();
 		JButton btnNewButton = new JButton("Send");
-	    User per;
-	    String fr;
 	    private final JButton btnBack = new JButton("Back");
+
 	
-    public Client(User u,String fri) {
-    	
-    	per=u;
-    	fr=fri;
+    public GroupClient(){
     	frmLetschat.setTitle("LetsChat");
     	frmLetschat.getContentPane().setBackground(UIManager.getColor("OptionPane.questionDialog.titlePane.background"));
     	frmLetschat.setBackground(UIManager.getColor("Button.background"));
@@ -44,15 +40,11 @@ public class Client {
                 textField.setText("");
         	}
         });
-        btnNewButton.setBounds(320, 264, 117, 38);
         frmLetschat.getContentPane().setLayout(null);
         frmLetschat.getContentPane().add(textField);
         frmLetschat.getContentPane().add(messageArea);
         frmLetschat.getContentPane().add(btnNewButton);
-        btnBack.setBounds(320, 310, 117, 44);
-        
-        frmLetschat.getContentPane().add(btnBack);
-		
+		frmLetschat.getContentPane().add(btnBack);
         textField.addActionListener(new ActionListener() {
           
             public void actionPerformed(ActionEvent e) {
@@ -60,6 +52,15 @@ public class Client {
                 textField.setText("");
             }
         });
+        btnNewButton.setBounds(320, 264, 117, 38);
+        btnBack.setBounds(320, 310, 117, 44);
+        frmLetschat.setTitle("LetsChat");
+        frmLetschat.setVisible(true);
+    }
+    
+    public void update(String msg)
+    {
+    	messageArea.append(msg.substring(4)+"\n");
     }
 
     public void run() throws IOException {
@@ -73,17 +74,18 @@ public class Client {
             String line = in.readLine();
             if(line.startsWith("mode"))
             {
-            	out.println("p2p");
+            	out.println("group");
             }
             else if (line.startsWith("name")) {
-                out.println(per.getUsername());
+                out.println(User.getUsername());
             }
-            else if(line.startsWith("friend"))
+            else if (line.startsWith("group"))
             {
-            	out.println(fr);
+            	out.println(Group.getGroupname());
             }
             else if (line.startsWith("msg ")) {
-                messageArea.append(line.substring(4) + "\n");
+            	update(line);
+                //messageArea.append(line.substring(4) + "\n");
             }
         }
 

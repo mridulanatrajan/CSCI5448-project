@@ -14,14 +14,14 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.awt.event.ActionEvent;
 
-public class userGroupView {
+public class UserGroupView {
 
 	private JFrame frame;
 	GroupMgmtController gm;
 	ResultSet rs;
 	HashSet<String> hs=new HashSet<String>();
 
-	public userGroupView() throws ClassNotFoundException, SQLException {
+	public UserGroupView() throws ClassNotFoundException, SQLException {
 		initialize();
 	}
 
