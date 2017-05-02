@@ -46,6 +46,12 @@ public class homeView {
 		frmLetschat.getContentPane().add(btnManageContacts);
 		
 		JButton btnManageGroups = new JButton("Manage Groups");
+		btnManageGroups.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frmLetschat.dispose();
+				grpMgmtView gmv= new grpMgmtView();
+			}
+		});
 		btnManageGroups.setBounds(129, 88, 190, 41);
 		frmLetschat.getContentPane().add(btnManageGroups);
 		
