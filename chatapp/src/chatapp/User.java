@@ -8,12 +8,12 @@ public class User {
 	public static int userID;
 	
 	
-	public String getUsername() {
+	public static String getUsername() {
 		return username;
 	}
 	
 	public void setUsername(String username) {
-		this.username = username;
+		User.username = username;
 	}
 	
 	public String getPassword() {
@@ -21,7 +21,7 @@ public class User {
 	}
 	
 	public void setPassword(String password) {
-		this.password = password;
+		User.password = password;
 	}
 	
 	public int getUserID() {
@@ -29,7 +29,7 @@ public class User {
 	}
 	
 	public void setUserID(int userID) {
-		this.userID = userID;
+		User.userID = userID;
 	}
 
 }
