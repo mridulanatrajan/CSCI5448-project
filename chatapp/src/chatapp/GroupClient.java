@@ -98,3 +98,18 @@ public class GroupClient implements ChatObserver{
 		
 	}
 }
+
+
+/*
+*This code was referenced from http://cs.lmu.edu/~ray/notes/javanetexamples/
+*
+*The methods were modifed in order to implement the observer design pattern and incorporate broadcast/group messaging.
+*
+*Methods incorporated and modified:
+*1) run
+*
+*Methods added:
+*1) update
+*
+*/
+

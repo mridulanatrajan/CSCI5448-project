@@ -95,6 +95,8 @@ public class Client {
 /*
 *This code was referenced from http://cs.lmu.edu/~ray/notes/javanetexamples/
 *
+*The methods were modifed in order to implement the observer design pattern and incorporate peer to peer messaging.
+*
 *Methods incorporated and modified:
 *1) run
 *

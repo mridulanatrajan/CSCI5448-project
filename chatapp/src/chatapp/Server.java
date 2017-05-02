@@ -168,6 +168,8 @@ public class Server extends Thread implements ChatSubject{
 /*
 *This code was referenced from http://cs.lmu.edu/~ray/notes/javanetexamples/
 *
+*The methods were modifed and added in order to acheive peertopeer and broadcast messaging and also implement the observer pattern.
+*
 *Methods incorporated
 *1)main
 *
