@@ -8,19 +8,23 @@ import java.util.HashSet;
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.SwingWorker;
+import javax.swing.UIManager;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
 
 public class UserGroupView {
 
-	private JFrame frame;
+	private JFrame frmLetschat;
 	GroupMgmtController gm;
 	ResultSet rs;
 	HashSet<String> hs=new HashSet<String>();
-
+	String grp;
+	int index;
+	boolean candelete;
 	public UserGroupView() throws ClassNotFoundException, SQLException {
 		initialize();
 	}
@@ -32,10 +36,13 @@ public class UserGroupView {
 	 */
 	private void initialize() throws ClassNotFoundException, SQLException {
 		gm=new GroupMgmtController();
-		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		frmLetschat = new JFrame();
+		frmLetschat.setTitle("LetsChat");
+		frmLetschat.getContentPane().setBackground(UIManager.getColor("OptionPane.questionDialog.titlePane.background"));
+		frmLetschat.setBackground(UIManager.getColor("Button.background"));
+		frmLetschat.setBounds(100, 100, 483, 415);
+		frmLetschat.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmLetschat.getContentPane().setLayout(null);
 		DefaultListModel<String> listModel = new DefaultListModel<>();
 		@SuppressWarnings("unchecked")
 		JList<String> list = new JList<String>(listModel);
@@ -46,13 +53,13 @@ public class UserGroupView {
 		{
 			listModel.addElement(rs.getString("groupname"));
 		}
-		frame.getContentPane().add(list);
+		frmLetschat.getContentPane().add(list);
 		
 		
 		JButton btnStart = new JButton("Start Chat");
 		btnStart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String grp=(String) list.getSelectedValue();
+				grp=(String) list.getSelectedValue();
 				Group.setGroupname(grp);
 				try {
 					rs=gm.retreiveGroupMembers();
@@ -62,7 +69,7 @@ public class UserGroupView {
 						System.out.println(rs.getString("username"));
 					}
 					Group.setGroupmembers(hs);
-					frame.dispose();
+					frmLetschat.dispose();
 					GroupClient gc=new GroupClient();
 					
 					 SwingWorker<String, Object> worker = new SwingWorker<String, Object>() {
@@ -87,13 +94,43 @@ public class UserGroupView {
 				
 			}
 		});
-		btnStart.setBounds(297, 56, 114, 55);
-		frame.getContentPane().add(btnStart);
+		JLabel lblNewLabel = new JLabel("");
+		btnStart.setBounds(297, 52, 128, 55);
+		frmLetschat.getContentPane().add(btnStart);
 		
 		JButton btnDeleteGroup = new JButton("Delete Group");
+		btnDeleteGroup.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				index = list.getSelectedIndex();
+				grp=(String) list.getSelectedValue();
+				try {
+					candelete=gm.deleteGroup(grp);
+					if(!candelete)
+						lblNewLabel.setText("ERROR:You are not the admin");
+					else
+					    listModel.removeElementAt(index);
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+				
+			}
+		});
 		btnDeleteGroup.setBounds(297, 147, 128, 55);
-		frame.getContentPane().add(btnDeleteGroup);
-		frame.setVisible(true);
+		frmLetschat.getContentPane().add(btnDeleteGroup);
+		
+		JButton btnBack = new JButton("Back");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frmLetschat.dispose();
+				GrpMgmtView gv=new GrpMgmtView();
+			}
+		});
+		btnBack.setBounds(178, 274, 117, 44);
+		frmLetschat.getContentPane().add(btnBack);
+		
+		lblNewLabel.setBounds(79, 226, 269, 24);
+		frmLetschat.getContentPane().add(lblNewLabel);
+		frmLetschat.setVisible(true);
 	}
 
 }
